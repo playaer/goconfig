@@ -179,9 +179,9 @@ func (c *ConfigFile) read(reader io.Reader) (err error) {
 // Note that the configuration is written to the system
 // temporary folder, so your file should not contain
 // sensitive information.
-func LoadFromData(data []byte) (c *ConfigFile, err error) {
+func LoadFromData(tmpDir string, data []byte) (c *ConfigFile, err error) {
 	// Save memory data to temporary file to support further operations.
-	tmpName := path.Join(os.TempDir(), "goconfig", fmt.Sprintf("%d", time.Now().Nanosecond()))
+	tmpName := path.Join(tmpDir, "goconfig", fmt.Sprintf("%d", time.Now().Nanosecond()))
 	if err = os.MkdirAll(path.Dir(tmpName), os.ModePerm); err != nil {
 		return nil, err
 	}
